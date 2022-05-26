@@ -1,4 +1,73 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: lightgray;
+}
+
 .container {
     width: 70%;
-    margin: 0 auto;
+    margin: 30px auto;
+}
+
+.tabs-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.tabs-container .tab-pane {
+    max-width: min-content;
+    display: flex;
+    position: relative;
+}
+
+.tabs-container .tab-pane .arrow {
+    font-size: 1.5rem;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 15%;
+    cursor: pointer;
+}
+
+    .tabs-container .tab-pane .arrow.arrow-left {
+        left: -30px;
+    }
+
+    .tabs-container .tab-pane .arrow.arrow-right {
+        right: -30px;
+    }
+
+.tabs-container .tab-pane .nav-container {
+    width: 670px;
+    position: relative;
+    margin-bottom: 50px;
+    overflow: hidden;
+}
+
+.tabs-container .tab-pane .nav-container .tabs {
+    display: flex;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.tabs-container .tab-pane .nav-container .tabs .tab {
+    min-width: 214px;
+    box-sizing: border-box;
+    padding: 16px 24px;
+    background-color: lightblue;
+    margin: 0 4px;
+    cursor: pointer;
+}
+
+.tabs-container .tab-pane .nav-container .tabs .tab:hover {
+    background-color: cornflowerblue;
 }
