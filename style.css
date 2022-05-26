@@ -71,3 +71,11 @@ body {
 .tabs-container .tab-pane .nav-container .tabs .tab:hover {
     background-color: cornflowerblue;
 }
+
+.tab-contents .tab-content {
+    display: none;
+}
+
+.tab-contents .tab-content.active {
+    display: block;
+}
