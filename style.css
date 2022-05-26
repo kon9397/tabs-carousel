@@ -46,9 +46,14 @@ body {
     }
 
 .tabs-container .tab-pane .nav-container {
-    width: 670px;
     position: relative;
     margin-bottom: 50px;
+    overflow: hidden;
+    width: 2000px;
+}
+
+.another-container {
+    width: 600px;
     overflow: hidden;
 }
 
@@ -56,16 +61,24 @@ body {
     display: flex;
     position: relative;
     top: 0;
-    left: 0;
+    right: 0;
+    flex-wrap: wrap;
+    transition: right .5s ease;
+}
+
+.tabs-container .tab-pane .nav-container .tabs .tab-wrapper {
+    padding: 0 4px;
+    box-sizing: border-box;
+
 }
 
 .tabs-container .tab-pane .nav-container .tabs .tab {
-    min-width: 214px;
+    width: 214px;
     box-sizing: border-box;
     padding: 16px 24px;
     background-color: lightblue;
-    margin: 0 4px;
     cursor: pointer;
+    border: 1px solid blue;
 }
 
 .tabs-container .tab-pane .nav-container .tabs .tab:hover {

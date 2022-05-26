@@ -1,61 +1,67 @@
-var tabContent = [
-    {
-        title: 'Just title 1',
-        text: 'Tab 1 tab 1 tab 1'
-    },
-    {
-        title: 'Just title 2',
-        text: 'Tab 2 tab 2 tab 2'
-    },
-    {
-        title: 'Just title 1',
-        text: 'Tab 3 tab 3 tab 3'
-    },
-    {
-        title: 'Just title 1',
-        text: 'Tab 4 tab 4 tab 4'
-    },
-    {
-        title: 'Just title 5',
-        text: 'Tab 5 tab 5 tab 5'
-    },
-    {
-        title: 'Just title 6',
-        text: 'Tab 6 tab 6 tab 6'
-    },
-    {
-        title: 'Just title 7',
-        text: 'Tab 7 tab 7 tab 7'
-    },
-    {
-        title: 'Just title 8',
-        text: 'Tab 8 tab 8 tab 8'
-    },
-    {
-        title: 'Just title 9',
-        text: 'Tab 9 tab 9 tab 9'
-    },
-]
+function TabsCarousel(selector) {
+    this.$selector = $(selector);
+    this.$navContainer = this.$selector.find('.nav-container');
+    this.$anotherContainer = this.$selector.find('.another-container');
 
-function generateTabs(data) {
-    var $tabsSelector = $('.tabs');
-    var $contentsSelector = $('.tab-contents');
+    this.$tabs = this.$selector.find('.tab');
+    this.$tabsTape = this.$selector.find('.tabs');
+    this.$tabWrapper = this.$selector.find('.tab-wrapper');
+    this.$tabWidth = this.$tabWrapper.outerWidth();
+    this.tapeContainerWidth = 0;
+    this.$arrowLeft = this.$selector.find('.arrow.arrow-left');
+    this.$arrowRight = this.$selector.find('.arrow.arrow-right');
+    this.rightValue = 0;
 
-    for(var i = 0; i < data.length; i++) {
-        $tabsSelector.append('<div data-tab="#tab-text' + i + '" class="tab">Tab ' + (i + 1) + '</div>');
+    this.init = function() {
+        console.log(this.$navContainer);
+        console.log(this.$tabs);
+        console.log(this.$tabWidth);
+        this.tapeContainerWidth = this.getTapeWidth();
+        this.setContainersSize();
+        this.moveCarousel();
 
-        $contentsSelector.append('<div id="tab-text' + i + '" class="tab-content">' +
-            '<h2>Tab' + (i + 1) +'</h2>' +
-            '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias architecto at, blanditiis distinctio eaque et ex explicabo illo impedit itaque libero quas quia quidem quos rem repudiandae vel, veniam voluptatem!</p>' +
-            '</div>\n')
+        console.log(this.tapeContainerWidth);
+    }
+
+    this.setContainersSize = function() {
+        this.$anotherContainer.css('width', this.$tabWidth * 3);
+        this.$navContainer.css('width', this.tapeContainerWidth);
+    }
+
+    this.moveCarousel = function() {
+        var self = this;
+
+        this.$arrowLeft.click(function() {
+
+            self.rightValue -= self.$tabWidth;
+            if(self.rightValue >= 0) {
+                self.$tabsTape.css('right', self.rightValue);
+            } else {
+                self.rightValue = 0;
+            }
+
+        })
+
+        this.$arrowRight.click(function() {
+            self.rightValue += self.$tabWidth;
+            if(self.rightValue <= (self.tapeContainerWidth - self.$tabWidth * 3)) {
+                self.$tabsTape.css('right', self.rightValue);
+            } else {
+                self.rightValue = self.tapeContainerWidth - self.$tabWidth * 3;
+                self.$tabsTape.css('right', self.tapeContainerWidth - self.$tabWidth * 3)
+            }
+
+        })
+    }
+
+    this.getTapeWidth = function () {
+        var widthSum = 0;
+        this.$tabWrapper.each(function(index, tab) {
+            widthSum += $(tab).outerWidth();
+        })
+        return widthSum;
     }
 }
-generateTabs(tabContent);
 
-$('.tab').click(function() {
-    var currentTab = $(this).attr('data-tab');
-
-    $('.tab-content').removeClass('active');
-    $('.tab-content' + currentTab).addClass('active');
-});
-
+var tabsCarousel = new TabsCarousel('.tabs-container');
+tabsCarousel.init();
