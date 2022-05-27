@@ -15,7 +15,7 @@ var tabContent = [
         title: 'Just title 1',
         text: 'Tab 4 tab 4 tab 4'
     },
-    {
+    /*{
         title: 'Just title 5',
         text: 'Tab 5 tab 5 tab 5'
     },
@@ -31,7 +31,7 @@ var tabContent = [
         title: 'Just title 8',
         text: 'Tab 8 tab 8 tab 8'
     },
-/*    {
+    {
         title: 'Just title 9',
         text: 'Tab 9 tab 9 tab 9'
     },*/
@@ -42,7 +42,7 @@ function generateTabs(data) {
     var $contentsSelector = $('.tab-contents');
 
     for(var i = 0; i < data.length; i++) {
-        $tabsSelector.append('<div class="tab-wrapper">' +
+        $tabsSelector.append('<div class="tab-wrapper" id="tab'+ i +'">' +
             '<div data-tab="#tab-text' + i + '" class="tab">Tab ' + (i + 1) + '</div>' +
             '</div>');
 

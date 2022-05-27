@@ -81,6 +81,10 @@ body {
     border: 1px solid blue;
 }
 
+.tabs-container .tab-pane .nav-container .tabs .tab.selected {
+    background-color: blue;
+}
+
 .tabs-container .tab-pane .nav-container .tabs .tab:hover {
     background-color: cornflowerblue;
 }

@@ -13,18 +13,26 @@ function TabsCarousel(selector) {
     this.rightValue = 0;
 
     this.init = function() {
-        console.log(this.$navContainer);
-        console.log(this.$tabs);
-        console.log(this.$tabWidth);
         this.tapeContainerWidth = this.getTapeWidth();
         this.setContainersSize();
         this.moveCarousel();
+        this.checkDisableArrow();
+        this.selectTab();
 
-        console.log(this.tapeContainerWidth);
+        if(localStorage.getItem('tab-id')) {
+            var selectedId = localStorage.getItem('tab-id');
+            $('#'+selectedId).addClass('selected');
+            this.$tabsTape.css('right', $('#'+selectedId).position().left) ;
+        }
     }
 
     this.setContainersSize = function() {
-        this.$anotherContainer.css('width', this.$tabWidth * 3);
+        if(this.$tabWrapper.length >= 3) {
+            this.$anotherContainer.css('width', this.$tabWidth * 3);
+        } else {
+            this.$anotherContainer.css('width', this.$tabWidth * this.$tabWrapper.length);
+        }
+
         this.$navContainer.css('width', this.tapeContainerWidth);
     }
 
@@ -54,12 +62,28 @@ function TabsCarousel(selector) {
         })
     }
 
+    this.selectTab = function() {
+        var self = this;
+        this.$tabWrapper.click(function() {
+            self.$tabs.removeClass('selected');
+            $(this).find('.tab').addClass('selected');
+            localStorage.setItem('tab-id', $(this).attr('id'));
+        })
+    }
+
     this.getTapeWidth = function () {
         var widthSum = 0;
         this.$tabWrapper.each(function(index, tab) {
             widthSum += $(tab).outerWidth();
         })
         return widthSum;
+    }
+
+    this.checkDisableArrow = function() {
+        if(this.$tabWrapper.length <= 3) {
+            this.$arrowLeft.hide();
+            this.$arrowRight.hide();
+        }
     }
 }
 
